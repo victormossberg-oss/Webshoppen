@@ -12,7 +12,7 @@ export default function Navbar() {
     <nav className="bg-blue-900 text-white p-4 flex justify-between items-center">
 
       {/* Logo / Titel — klickbar för att gå till startsidan */}
-      <Link to="/" className="text-xl font-bold hover:text-gray-300 transition">
+      <Link to="/" className="text-xl font-bold">
         Webshoppen
       </Link>
 
