@@ -11,8 +11,10 @@ export default function Navbar() {
   return (
     <nav className="bg-blue-900 text-white p-4 flex justify-between items-center">
 
-      {/* Logo / Titel */}
-      <h1 className="text-xl font-bold">Webshoppen</h1>
+      {/* Logo / Titel — klickbar för att gå till startsidan */}
+      <Link to="/" className="text-xl font-bold hover:text-gray-300 transition">
+        Webshoppen
+      </Link>
 
       {/* Länkar */}
       <div className="flex gap-10 items-center">

@@ -34,5 +34,3 @@ export default function App() {
   );
 }
 
-// Exporterar komponenten så den kan användas i main.jsx
-//export default App;
