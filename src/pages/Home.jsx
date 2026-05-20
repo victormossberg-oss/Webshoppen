@@ -10,6 +10,9 @@ export default function Home() {
   // State för utvalda produkter (vi visar bara några få här)
   const [featured, setFeatured] = useState([]);
 
+  // State för loading — true medan vi väntar på API:et
+  const [loading, setLoading] = useState(true);
+
   // Hämtar produkter när sidan laddas
   useEffect(() => {
     const fetchFeatured = async () => {
@@ -20,6 +23,9 @@ export default function Home() {
         setFeatured(data.products);
       } catch (error) {
         console.log("Fel:", error);
+      } finally {
+        // Körs alltid — oavsett om det gick bra eller inte
+        setLoading(false);
       }
     };
 
@@ -47,6 +53,10 @@ export default function Home() {
       <section className="p-6">
         <h2 className="text-2xl font-bold mb-6 text-center">Utvalda produkter</h2>
 
+        {/* Visa "Laddar..."-text medan vi hämtar från API */}
+        {loading ? (
+          <p className="text-xl font-bold text-center mt-10">Laddar produkter...</p>
+        ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {featured.map(product => (
             <div
@@ -79,6 +89,7 @@ export default function Home() {
             </div>
           ))}
         </div>
+        )}
 
         {/* Länk till alla produkter */}
         <div className="text-center mt-8">
