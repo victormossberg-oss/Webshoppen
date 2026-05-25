@@ -23,6 +23,10 @@ export default function Products() {
   // → uppdateras först 300ms efter att användaren slutat skriva
   const debouncedSearch = useDebounce(search, 300);
 
+  // State för vilken sida användaren är på
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 20;
+
   // Körs när debouncedSearch ändras (alltså efter att användaren pausat)
   useEffect(() => {
 
@@ -53,63 +57,102 @@ export default function Products() {
     fetchProducts();
   }, [debouncedSearch]);
 
+  // Räkna ut totalt antal sidor och vilka produkter som ska visas just nu
+  const totalPages = Math.ceil(products.length / productsPerPage);
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const visibleProducts = products.slice(startIndex, startIndex + productsPerPage);
+
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6 text-center">Alla produkter</h1>
+    <div className="p-6 max-w-7xl mx-auto">
+      <h1 className="text-4xl font-black uppercase tracking-tight mb-8 text-center">Alla produkter</h1>
 
       {/* SÖKFÄLT */}
-      <div className="max-w-md mx-auto mb-8">
+      <div className="max-w-md mx-auto mb-12">
         <input
           type="text"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Sök produkter..."
-          className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-900"
+          onChange={(e) => {
+            setSearch(e.target.value);
+            // Hoppa tillbaka till sida 1 när användaren söker
+            setCurrentPage(1);
+          }}
+          placeholder="SÖK PRODUKTER..."
+          className="w-full border border-black px-4 py-3 uppercase tracking-wide text-sm focus:outline-none focus:ring-2 focus:ring-black"
         />
       </div>
 
       {/* LADDTEXT eller PRODUKTER */}
       {loading ? (
-        <p className="text-xl font-bold text-center mt-10">Laddar produkter...</p>
+        <p className="text-center mt-10 uppercase tracking-wide">Laddar produkter...</p>
       ) : products.length === 0 ? (
-        <p className="text-center text-gray-600 mt-10">
+        <p className="text-center text-gray-600 mt-10 uppercase tracking-wide">
           Inga produkter matchade din sökning.
         </p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {products.map(product => (
+        <>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {visibleProducts.map(product => (
             <div
               key={product.id}
-              className="bg-white rounded-2xl shadow-md p-4 hover:shadow-xl transition flex flex-col"
+              className="bg-white border border-gray-200 hover:border-black transition flex flex-col"
             >
 
               {/* Bild */}
               <img
                 src={product.thumbnail}
-                className="w-full h-40 object-contain bg-gray-100 rounded-lg"
+                className="w-full h-48 object-contain bg-gray-100 p-4"
               />
 
-              {/* Titel — line-clamp-2 = max 2 rader */}
-              <h3 className="text-lg font-semibold mt-3 line-clamp-2 min-h-[3.5rem]">
-                {product.title}
-              </h3>
+              <div className="p-4 flex flex-col flex-1">
 
-              {/* Pris */}
-              <p className="text-gray-600">{product.price} kr</p>
+                {/* Titel — line-clamp-2 = max 2 rader */}
+                <h3 className="text-sm font-bold uppercase line-clamp-2 min-h-[3rem]">
+                  {product.title}
+                </h3>
 
-              {/* mt-auto trycker ner knappen till botten av kortet */}
-              <Link
-                to={`/product/${product.id}`}
-                className="block mt-auto pt-3"
-              >
-                <span className="block bg-gray-800 text-white text-center py-2 rounded-lg hover:bg-blue-900">
-                  Visa produkt
-                </span>
-              </Link>
+                {/* Pris */}
+                <p className="text-black font-bold mt-2">{product.price} kr</p>
+
+                {/* mt-auto trycker ner knappen till botten av kortet */}
+                <Link
+                  to={`/product/${product.id}`}
+                  className="block mt-auto pt-4"
+                >
+                  <span className="block bg-black text-white text-center py-3 font-bold uppercase tracking-wide text-sm border border-black hover:bg-white hover:text-black transition">
+                    Visa produkt →
+                  </span>
+                </Link>
+              </div>
 
             </div>
           ))}
         </div>
+
+        {/* PAGINERING — visa bara om det finns fler än en sida */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center gap-4 mt-12">
+            <button
+              onClick={() => setCurrentPage(p => p - 1)}
+              disabled={currentPage === 1}
+              className="px-6 py-3 bg-black text-white font-bold uppercase tracking-wide text-sm border border-black disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white hover:text-black transition"
+            >
+              ← Föregående
+            </button>
+
+            <span className="uppercase tracking-wide text-sm font-bold">
+              Sida {currentPage} av {totalPages}
+            </span>
+
+            <button
+              onClick={() => setCurrentPage(p => p + 1)}
+              disabled={currentPage === totalPages}
+              className="px-6 py-3 bg-black text-white font-bold uppercase tracking-wide text-sm border border-black disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white hover:text-black transition"
+            >
+              Nästa →
+            </button>
+          </div>
+        )}
+        </>
       )}
     </div>
   );

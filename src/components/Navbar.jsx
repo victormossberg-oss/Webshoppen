@@ -9,10 +9,10 @@ export default function Navbar() {
   const { itemCount } = useCart();
 
   return (
-    <nav className="bg-blue-900 text-white p-4 flex justify-between items-center">
+    <nav className="bg-white text-black px-6 py-4 flex justify-between items-center border-b border-black">
 
       {/* Logo / Titel — klickbar för att gå till startsidan */}
-      <Link to="/" className="text-xl font-bold">
+      <Link to="/" className="text-2xl font-black uppercase tracking-tight">
         Webshoppen
       </Link>
 
@@ -21,14 +21,14 @@ export default function Navbar() {
 
         <Link
           to="/"
-          className="hover:text-gray-300 transition"
+          className="font-bold uppercase text-sm tracking-wide hover:underline"
         >
           Hem
         </Link>
 
         <Link
           to="/products"
-          className="hover:text-gray-300 transition"
+          className="font-bold uppercase text-sm tracking-wide hover:underline"
         >
           Produkter
         </Link>
@@ -36,13 +36,13 @@ export default function Navbar() {
         {/* Kundvagn med liten siffra */}
         <Link
           to="/cart"
-          className="hover:text-gray-300 transition relative"
+          className="font-bold uppercase text-sm tracking-wide hover:underline relative"
         >
           Kundvagn
 
           {/* Visar siffran bara om det finns något i vagnen */}
           {itemCount > 0 && (
-            <span className="absolute -top-2 -right-4 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+            <span className="absolute -top-2 -right-4 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
               {itemCount}
             </span>
           )}

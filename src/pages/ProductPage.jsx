@@ -45,52 +45,52 @@ export default function ProductPage() {
   }, [id]); // körs igen om id ändras
 
   // Om produkten inte laddats än
-  if (!product) return <p className="text-center mt-10">Laddar produkt...</p>;
+  if (!product) return <p className="text-center mt-10 uppercase tracking-wide">Laddar produkt...</p>;
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto p-6">
 
       {/* Bild */}
       <img
         src={product.thumbnail}
-        className="w-full h-80 object-contain bg-gray-100 rounded-2xl"
+        className="w-full h-96 object-contain bg-gray-100 p-8"
       />
 
       {/* Produktens titel */}
-      <h1 className="text-3xl font-bold mt-6">{product.title}</h1>
+      <h1 className="text-4xl font-black uppercase tracking-tight mt-8">{product.title}</h1>
 
       {/* Pris */}
-      <p className="text-2xl text-blue-900 font-semibold mt-2">
+      <p className="text-2xl text-black font-bold mt-2">
         {product.price} kr
       </p>
 
       {/* Beskrivning */}
-      <p className="text-gray-700 mt-4">{product.description}</p>
+      <p className="text-gray-700 mt-6 leading-relaxed">{product.description}</p>
 
       {/* Antal + Lägg i kundvagn-knapp */}
-      <div className="flex items-center gap-4 mt-6">
+      <div className="flex items-center gap-4 mt-8">
 
         {/* Antal-väljare */}
-        <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+        <div className="flex items-center border border-black">
 
           {/* Minus-knapp — inaktiverad om quantity är 1 */}
           <button
             onClick={() => setQuantity(q => Math.max(1, q - 1))}
             disabled={quantity === 1}
-            className="px-4 py-3 hover:bg-gray-100 disabled:text-gray-300 disabled:cursor-not-allowed"
+            className="px-4 py-3 font-bold hover:bg-gray-100 disabled:text-gray-300 disabled:cursor-not-allowed"
           >
             −
           </button>
 
           {/* Visar aktuellt antal */}
-          <span className="px-4 py-3 min-w-[3rem] text-center font-semibold">
+          <span className="px-4 py-3 min-w-[3rem] text-center font-bold">
             {quantity}
           </span>
 
           {/* Plus-knapp */}
           <button
             onClick={() => setQuantity(q => q + 1)}
-            className="px-4 py-3 hover:bg-gray-100"
+            className="px-4 py-3 font-bold hover:bg-gray-100"
           >
             +
           </button>
@@ -102,9 +102,9 @@ export default function ProductPage() {
             addToCart(product, quantity);
             setQuantity(1); // Återställ till 1 efter tillagd
           }}
-          className="flex-1 bg-blue-900 text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition"
+          className="flex-1 bg-black text-white px-6 py-3 font-bold uppercase tracking-wide text-sm border border-black hover:bg-white hover:text-black transition"
         >
-          Lägg i kundvagn
+          Lägg i kundvagn →
         </button>
       </div>
 

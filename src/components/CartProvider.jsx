@@ -2,7 +2,7 @@
 // (context-objektet och useCart-hooken ligger i CartContext.jsx)
 
 import { useEffect, useState } from "react";
-import { CartContext } from "./CartContext";
+import { CartContext } from "../context/CartContext";
 
 // CartProvider = komponenten som håller i kundvagnen
 // Allt som ligger inuti den kan komma åt kundvagnen via useCart()

@@ -44,15 +44,15 @@ export default function Checkout() {
     return (
       <div className="max-w-xl mx-auto text-center py-20 px-6">
         <div className="text-6xl mb-4">✅</div>
-        <h1 className="text-3xl font-bold mb-4">Tack för din beställning!</h1>
-        <p className="text-gray-600 mb-8">
+        <h1 className="text-4xl font-black uppercase tracking-tight mb-4">Tack för din beställning!</h1>
+        <p className="text-gray-600 mb-8 uppercase tracking-wide text-sm">
           Vi har skickat en bekräftelse till {form.email}.
         </p>
         <Link
           to="/"
-          className="inline-block bg-blue-900 text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition"
+          className="inline-block bg-black text-white px-8 py-3 font-bold uppercase tracking-wide text-sm border border-black hover:bg-white hover:text-black transition"
         >
-          Tillbaka till butiken
+          Tillbaka till butiken →
         </Link>
       </div>
     );
@@ -63,12 +63,12 @@ export default function Checkout() {
   if (cart.length === 0) {
     return (
       <div className="text-center py-20">
-        <p className="text-xl text-gray-600">Din kundvagn är tom</p>
+        <p className="text-xl text-gray-600 uppercase tracking-wide">Din kundvagn är tom</p>
         <Link
           to="/products"
-          className="inline-block mt-6 bg-blue-900 text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition"
+          className="inline-block mt-6 bg-black text-white px-8 py-3 font-bold uppercase tracking-wide text-sm border border-black hover:bg-white hover:text-black transition"
         >
-          Till produkterna
+          Till produkterna →
         </Link>
       </div>
     );
@@ -77,7 +77,7 @@ export default function Checkout() {
   // ----- KASSAN -----
   return (
     <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Kassa</h1>
+      <h1 className="text-4xl font-black uppercase tracking-tight mb-8">Kassa</h1>
 
       {/* Layout: formulär till vänster, sammanfattning till höger */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -86,8 +86,8 @@ export default function Checkout() {
         <form id="checkout-form" onSubmit={handleSubmit} className="lg:col-span-2 space-y-6">
 
           {/* --- KONTAKTUPPGIFTER --- */}
-          <section className="bg-white p-6 rounded-2xl shadow">
-            <h2 className="text-xl font-semibold mb-4">Kontaktuppgifter</h2>
+          <section className="bg-white border border-gray-200 p-6">
+            <h2 className="text-xl font-bold uppercase tracking-tight mb-4">Kontaktuppgifter</h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Field
@@ -95,7 +95,7 @@ export default function Checkout() {
                 name="name"
                 value={form.name}
                 onChange={handleChange}
-                placeholder="Anna Andersson"
+                placeholder="Victor Mossberg"
               />
               <Field
                 label="E-post"
@@ -103,7 +103,7 @@ export default function Checkout() {
                 type="email"
                 value={form.email}
                 onChange={handleChange}
-                placeholder="anna@example.com"
+                placeholder="victor@example.com"
               />
               <Field
                 label="Telefon"
@@ -118,8 +118,8 @@ export default function Checkout() {
           </section>
 
           {/* --- LEVERANSADRESS --- */}
-          <section className="bg-white p-6 rounded-2xl shadow">
-            <h2 className="text-xl font-semibold mb-4">Leveransadress</h2>
+          <section className="bg-white border border-gray-200 p-6">
+            <h2 className="text-xl font-bold uppercase tracking-tight mb-4">Leveransadress</h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <Field
@@ -149,8 +149,8 @@ export default function Checkout() {
           </section>
 
           {/* --- BETALNING --- */}
-          <section className="bg-white p-6 rounded-2xl shadow">
-            <h2 className="text-xl font-semibold mb-4">Betalning</h2>
+          <section className="bg-white border border-gray-200 p-6">
+            <h2 className="text-xl font-bold uppercase tracking-tight mb-4">Betalning</h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Field
@@ -181,15 +181,15 @@ export default function Checkout() {
           {/* Skicka-knapp (syns bara på mobil, desktop har den i summary) */}
           <button
             type="submit"
-            className="w-full bg-blue-900 text-white py-3 rounded-lg hover:bg-blue-800 transition lg:hidden"
+            className="w-full bg-black text-white py-4 font-bold uppercase tracking-wide text-sm border border-black hover:bg-white hover:text-black transition cursor-pointer lg:hidden"
           >
-            Slutför köp ({total.toFixed(2)} kr)
+            Slutför köp ({total.toFixed(2)} kr) →
           </button>
         </form>
 
         {/* ORDERSAMMANFATTNING (höger sida) */}
-        <aside className="bg-white p-6 rounded-2xl shadow h-fit lg:sticky lg:top-6">
-          <h2 className="text-xl font-semibold mb-4">Din order</h2>
+        <aside className="bg-white border border-gray-200 p-6 h-fit lg:sticky lg:top-6">
+          <h2 className="text-xl font-bold uppercase tracking-tight mb-4">Din order</h2>
 
           {/* Lista produkter */}
           <div className="space-y-3 mb-4">
@@ -197,13 +197,13 @@ export default function Checkout() {
               <div key={item.id} className="flex gap-3 items-center">
                 <img
                   src={item.thumbnail}
-                  className="w-12 h-12 object-contain bg-gray-100 rounded"
+                  className="w-12 h-12 object-contain bg-gray-100"
                 />
                 <div className="flex-1 text-sm">
-                  <p className="font-medium line-clamp-1">{item.title}</p>
+                  <p className="font-bold uppercase text-xs line-clamp-1">{item.title}</p>
                   <p className="text-gray-500">{item.quantity} × {item.price} kr</p>
                 </div>
-                <p className="text-sm font-semibold">
+                <p className="text-sm font-bold">
                   {(item.price * item.quantity).toFixed(2)} kr
                 </p>
               </div>
@@ -211,12 +211,12 @@ export default function Checkout() {
           </div>
 
           {/* Summa */}
-          <div className="border-t pt-4 space-y-2">
-            <div className="flex justify-between text-gray-600">
+          <div className="border-t border-black pt-4 space-y-2">
+            <div className="flex justify-between text-gray-600 uppercase tracking-wide text-sm">
               <span>Frakt</span>
               <span>Fri</span>
             </div>
-            <div className="flex justify-between text-lg font-bold">
+            <div className="flex justify-between text-lg font-black uppercase tracking-tight">
               <span>Totalt</span>
               <span>{total.toFixed(2)} kr</span>
             </div>
@@ -228,9 +228,9 @@ export default function Checkout() {
           <button
             type="submit"
             form="checkout-form"
-            className="w-full mt-6 bg-blue-900 text-white py-3 rounded-lg hover:bg-blue-800 transition hidden lg:block"
+            className="w-full mt-6 bg-black text-white py-4 font-bold uppercase tracking-wide text-sm border border-black hover:bg-white hover:text-black transition cursor-pointer hidden lg:block"
           >
-            Slutför köp
+            Slutför köp →
           </button>
         </aside>
 
@@ -244,7 +244,7 @@ export default function Checkout() {
 function Field({ label, name, type = "text", value, onChange, placeholder, className = "" }) {
   return (
     <div className={className}>
-      <label className="block text-sm font-medium text-gray-700 mb-1">
+      <label className="block text-xs font-bold uppercase tracking-wide text-gray-700 mb-1">
         {label}
       </label>
       <input
@@ -254,7 +254,7 @@ function Field({ label, name, type = "text", value, onChange, placeholder, class
         onChange={onChange}
         placeholder={placeholder}
         required
-        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-900"
+        className="w-full border border-black px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black"
       />
     </div>
   );
