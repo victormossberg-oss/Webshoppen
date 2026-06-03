@@ -37,10 +37,11 @@ Appen startar på `http://localhost:5173`.
 ```
 src/
 ├── components/
-│   └── Navbar.jsx           Navigation med kundvagn-räknare
-├── context/
-│   ├── CartContext.jsx      Context-objekt + useCart-hook
+│   ├── Navbar.jsx           Navigation med kundvagn-räknare
+│   ├── Footer.jsx           Footer som visas på alla sidor
 │   └── CartProvider.jsx     State och logik för kundvagnen
+├── context/
+│   └── CartContext.jsx      Context-objekt + useCart-hook
 ├── hooks/
 │   └── useDebounce.js       Återanvändbar debounce-hook
 ├── pages/
