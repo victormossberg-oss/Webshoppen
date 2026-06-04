@@ -31,7 +31,7 @@ export default function Footer() {
           <ul className="space-y-2 text-gray-400 text-sm">
             <li>kontakt@webshoppen.se</li>
             <li>070-123 45 67</li>
-            <li>Stockholm, Sverige</li>
+            <li>Visby, Sverige</li>
           </ul>
         </div>
 
