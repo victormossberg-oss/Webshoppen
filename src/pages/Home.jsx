@@ -41,7 +41,7 @@ export default function Home() {
           Välkommen till Webshoppen
         </h1>
         <p className="text-base mb-10 text-gray-300 uppercase tracking-widest">
-          Allt du behöver — direkt från dummyjson
+          Allt skräp du behöver — direkt från dummyjson
         </p>
         <Link
           to="/products"
