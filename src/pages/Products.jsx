@@ -45,7 +45,7 @@ export default function Products() {
         setProducts(data.products);
 
       } catch (error) {
-        // try/catch krävs enligt projektets tekniska krav
+        // try/catch
         // Fångar nätverksfel så appen inte kraschar
         console.log("Fel vid hämtning:", error);
 
